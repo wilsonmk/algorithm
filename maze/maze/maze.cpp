@@ -80,27 +80,36 @@ int main()
 	};
 	node *head=NULL;//栈的头指针
 	Push(head,0,0,1);//入口进栈
+	/*node temp=Getpop(head);
+	Change(head,temp.direction+1);
+	Push(head,2,2,1);
+	temp=Getpop(head);
+	Change(head,temp.direction+2);*/
 	int i=0;
-	while(i<2)
+	while(i<1)
 	{
 		i++;
 		//对下一块进行探测
 		bool sea=true;
+		node  temp;
 		while(sea)
 		{
-			node  temp=Getpop(head);
+			temp=Getpop(head);
 			cout<<temp.direction<<endl;
 			switch (temp.direction)
 			{
 			case 1:
+				cout<<temp.x<<"  huoqu "<<temp.y<<"map[temp.x+1][temp.y]:"<<map[temp.x+1][temp.y]<<endl;
 				if((temp.x+1)<BLOCKNUM&&map[temp.x+1][temp.y]==0)
 				{
 					Push(head,temp.x+1,temp.y,1);
 					sea=false;
+					cout<<"cao"<<endl;
 				}
 				else
 				{
 					Change(head,temp.direction+1);
+					cout<<"cao2222"<<endl;
 				}
 			
 				break;
