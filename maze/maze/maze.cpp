@@ -73,18 +73,14 @@ int main()
 {
 	//0表示可以通行
 	int map[BLOCKNUM][BLOCKNUM]={
-		{0,1,1,0},
-		{0,0,0,0},
+		{0,0,1,0},
+		{1,0,0,0},
 		{0,0,1,1},
 		{1,0,0,0}
 	};
 	node *head=NULL;//栈的头指针
 	Push(head,0,0,1);//入口进栈
-	/*node temp=Getpop(head);
-	Change(head,temp.direction+1);
-	Push(head,2,2,1);
-	temp=Getpop(head);
-	Change(head,temp.direction+2);*/
+	
 	int i=0;
 	while(i<10)
 	{
