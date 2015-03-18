@@ -11,8 +11,8 @@ using namespace std;
 //定义栈的结构
 struct node
 {
-	int x;
-	int y;
+	int x;//行
+	int y;//列  对应map[x][y]
 	int direction;//1代表向右，2代表向下，3代表向左，4代表向上，存放探索方向
 	node *next;
 	node()
@@ -73,8 +73,8 @@ int main()
 {
 	//0表示可以通行
 	int map[BLOCKNUM][BLOCKNUM]={
-		{0,0,1,0},
-		{1,0,0,0},
+		{0,1,1,0},
+		{0,0,0,0},
 		{0,0,1,1},
 		{1,0,0,0}
 	};
@@ -86,7 +86,7 @@ int main()
 	temp=Getpop(head);
 	Change(head,temp.direction+2);*/
 	int i=0;
-	while(i<1)
+	while(i<10)
 	{
 		i++;
 		//对下一块进行探测
@@ -99,24 +99,23 @@ int main()
 			switch (temp.direction)
 			{
 			case 1:
-				cout<<temp.x<<"  huoqu "<<temp.y<<"map[temp.x+1][temp.y]:"<<map[temp.x+1][temp.y]<<endl;
-				if((temp.x+1)<BLOCKNUM&&map[temp.x+1][temp.y]==0)
+				//cout<<temp.x<<"  huoqu "<<temp.y<<"  map[temp.x+1][temp.y]:"<<map[temp.x+1][temp.y]<<endl;
+				if((temp.y+1)<BLOCKNUM&&map[temp.x][temp.y+1]==0)
 				{
-					Push(head,temp.x+1,temp.y,1);
+					Push(head,temp.x,temp.y+1,1);
 					sea=false;
-					cout<<"cao"<<endl;
+					
 				}
 				else
 				{
-					Change(head,temp.direction+1);
-					cout<<"cao2222"<<endl;
+					Change(head,temp.direction+1);		
 				}
 			
 				break;
 			case 2:
-				if((temp.y+1)<BLOCKNUM&&map[temp.x][temp.y+1]==0)
+				if((temp.x+1)<BLOCKNUM&&map[temp.x+1][temp.y]==0)
 				{
-					Push(head,temp.x,temp.y+1,1);
+					Push(head,temp.x+1,temp.y,1);
 					sea=false;
 				}
 				else
@@ -125,9 +124,9 @@ int main()
 				}
 				break;
 			case 3:
-				if((temp.x-1)>=0&&map[temp.x-1][temp.y]==0)
+				if((temp.y-1)>=0&&map[temp.x][temp.y-1]==0)
 				{
-					Push(head,temp.x-1,temp.y,1);
+					Push(head,temp.x,temp.y-1,1);
 					sea=false;
 				}
 				else
@@ -136,7 +135,7 @@ int main()
 				}
 				break;
 			case 4:
-				if((temp.y-1)>=0&&map[temp.x][temp.y-1]==0)
+				if((temp.x-1)>=0&&map[temp.x-1][temp.y]==0)
 				{
 					Push(head,temp.x-1,temp.y,1);
 					sea=false;
