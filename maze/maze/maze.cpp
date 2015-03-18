@@ -62,6 +62,16 @@ node Getpop(node * head)
 	return temp;
 }
 
+//获取栈第二个元素，用于对比，防止一直左右或上下循环
+node GetSecond(node * head)
+{
+	node temp;
+	temp.x=head->next->x;
+	temp.y=head->next->y;
+	temp.direction=head->next->direction;
+	return temp;
+}
+
 //修改栈顶元素方向
 void Change(node * & head,int drection)
 {
@@ -87,16 +97,17 @@ int main()
 		i++;
 		//对下一块进行探测
 		bool sea=true;
-		node  temp;
+		node  temp,second;
 		while(sea)
 		{
 			temp=Getpop(head);
+			second=GetSecond(head);
 			cout<<temp.direction<<endl;
 			switch (temp.direction)
 			{
 			case 1:
 				//cout<<temp.x<<"  huoqu "<<temp.y<<"  map[temp.x+1][temp.y]:"<<map[temp.x+1][temp.y]<<endl;
-				if((temp.y+1)<BLOCKNUM&&map[temp.x][temp.y+1]==0)
+				if((temp.y+1)<BLOCKNUM&&map[temp.x][temp.y+1]==0&&second.direction!=3)
 				{
 					Push(head,temp.x,temp.y+1,1);
 					sea=false;
@@ -109,7 +120,7 @@ int main()
 			
 				break;
 			case 2:
-				if((temp.x+1)<BLOCKNUM&&map[temp.x+1][temp.y]==0)
+				if((temp.x+1)<BLOCKNUM&&map[temp.x+1][temp.y]==0&&second.direction!=4)
 				{
 					Push(head,temp.x+1,temp.y,1);
 					sea=false;
@@ -120,7 +131,7 @@ int main()
 				}
 				break;
 			case 3:
-				if((temp.y-1)>=0&&map[temp.x][temp.y-1]==0)
+				if((temp.y-1)>=0&&map[temp.x][temp.y-1]==0&&second.direction!=1)
 				{
 					Push(head,temp.x,temp.y-1,1);
 					sea=false;
@@ -131,7 +142,7 @@ int main()
 				}
 				break;
 			case 4:
-				if((temp.x-1)>=0&&map[temp.x-1][temp.y]==0)
+				if((temp.x-1)>=0&&map[temp.x-1][temp.y]==0&&second.direction!=2)
 				{
 					Push(head,temp.x-1,temp.y,1);
 					sea=false;

@@ -1,4 +1,4 @@
-﻿生成启动时间为 2015/3/18 22:49:43。
+﻿生成启动时间为 2015/3/18 22:56:10。
      1>项目“E:\VS2012\Projects\maze\maze\maze.vcxproj”在节点 2 上(Build 个目标)。
      1>ClCompile:
          D:\WIN8\VS2012\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Debug\maze.pch" /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt maze.cpp
@@ -11,4 +11,4 @@
 
 生成成功。
 
-已用时间 00:00:01.10
+已用时间 00:00:01.00
