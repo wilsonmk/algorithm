@@ -8,6 +8,8 @@ using namespace std;
 
 #define BLOCKNUM 4//迷宫地图大小
 
+//主要问题，会左右上下死循环
+
 //定义栈的结构
 struct node
 {
