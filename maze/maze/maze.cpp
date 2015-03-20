@@ -15,8 +15,9 @@ struct node
 {
 	int x;//行
 	int y;//列  对应map[x][y]
-	int direction;//1代表向右，2代表向下，3代表向左，4代表向上，存放探索方向
+	int direction;//1代表向右，2代表向下，3代表向左，4代表向上，存放探索方向,下一次探索的方向
 	node *next;
+	int above;//上一块是哪个方向探索下来的，防止左右上下死循环
 	node()
 	{
 		next=NULL;
@@ -24,11 +25,13 @@ struct node
 };
 
 //进栈---插入到head之后
-void Push(node * &head,int x,int y,int direction)
+void Push(node * &head,int x,int y,int direction,int above)
 {
 	
      node * temp=new node;
 	 temp->x=x;temp->y=y;temp->direction=direction;
+	 temp->above=above;
+
 	 if(head==NULL)
 		 head=temp;
 	 else
@@ -61,6 +64,7 @@ node Getpop(node * head)
 	temp.x=head->x;
 	temp.y=head->y;
 	temp.direction=head->direction;
+	temp.above=head->above;
 	return temp;
 }
 
@@ -82,29 +86,26 @@ int main()
 		{1,0,0,0}
 	};
 	node *head=NULL;//栈的头指针
-	Push(head,0,0,1);//入口进栈
-	
-	int i=0;
-	while(i<10)
+	Push(head,0,0,1,0);//入口进栈
+	//探索路径
+	while(true)
 	{
-		i++;
+	
 		//对下一块进行探测
 		bool sea=true;
 		node  temp;
-		int dre=-1;//记录前进的方向，防止左右上下死循环
 		while(sea)
 		{
-			temp=Getpop(head);
-			
-			cout<<temp.direction<<endl;
+			temp=Getpop(head);						
 			switch (temp.direction)
 			{
 			case 1:
-				//cout<<temp.x<<"  huoqu "<<temp.y<<"  map[temp.x+1][temp.y]:"<<map[temp.x+1][temp.y]<<endl;
-				if((temp.y+1)<BLOCKNUM&&map[temp.x][temp.y+1]==0)
+				
+				if((temp.y+1)<BLOCKNUM&&map[temp.x][temp.y+1]==0&&temp.above!=3)
 				{
-					Push(head,temp.x,temp.y+1,1);
-					sea=false;
+					Change(head,temp.direction+1);	
+					Push(head,temp.x,temp.y+1,1,1);
+					sea=false; 
 					
 				}
 				else
@@ -114,9 +115,10 @@ int main()
 			
 				break;
 			case 2:
-				if((temp.x+1)<BLOCKNUM&&map[temp.x+1][temp.y]==0)
+				if((temp.x+1)<BLOCKNUM&&map[temp.x+1][temp.y]==0&&temp.above!=4)
 				{
-					Push(head,temp.x+1,temp.y,1);
+					Change(head,temp.direction+1);
+					Push(head,temp.x+1,temp.y,1,2);
 					sea=false;
 				}
 				else
@@ -125,9 +127,10 @@ int main()
 				}
 				break;
 			case 3:
-				if((temp.y-1)>=0&&map[temp.x][temp.y-1]==0)
+				if((temp.y-1)>=0&&map[temp.x][temp.y-1]==0&&temp.above!=1)
 				{
-					Push(head,temp.x,temp.y-1,1);
+					Change(head,temp.direction+1);
+					Push(head,temp.x,temp.y-1,1,3);
 					sea=false;
 				}
 				else
@@ -136,20 +139,25 @@ int main()
 				}
 				break;
 			case 4:
-				if((temp.x-1)>=0&&map[temp.x-1][temp.y]==0)
+				if((temp.x-1)>=0&&map[temp.x-1][temp.y]==0&&temp.above!=2)
 				{
-					Push(head,temp.x-1,temp.y,1);
+					Change(head,temp.direction+1);
+					Push(head,temp.x-1,temp.y,1,4);
 					sea=false;
 				}
 				else
 				{
 					Pop(head);
+					sea=false;
 				}
 				break;
 			default:
+				Pop(head);
+				sea=false;
 				break;
 			}
 		}
+		
 	}
 	node *kk=head;
 	while(kk!=NULL)
