@@ -78,10 +78,10 @@ void Change(node * & head,int drection)
 
 int main()
 {
-	//0表示可以通行
+	//0表示可以通行，入口为（0，0），出口为（3，3）
 	int map[BLOCKNUM][BLOCKNUM]={
-		{0,0,1,0},
-		{1,0,0,0},
+		{0,1,1,0},
+		{0,0,0,0},
 		{0,0,1,1},
 		{1,0,0,0}
 	};
@@ -90,7 +90,7 @@ int main()
 	//探索路径
 	while(true)
 	{
-	    if(Getpop(head).x==3&&Getpop(head).y==3)
+	    if(Getpop(head).x==3&&Getpop(head).y==3)//找到出口，停止循环
 			break;
 		//对下一块进行探测
 		bool sea=true;
@@ -166,6 +166,7 @@ int main()
 	}
 	node *kk=head;
 	cout<<"走出迷宫路径为："<<endl;
+	//方向是反的，因为栈先进后出，可以自己进行处理实现顺序路径
 	while(kk!=NULL)
 	{		
 		cout<<"("<<kk->x<<","<<kk->y<<")"<<endl;
