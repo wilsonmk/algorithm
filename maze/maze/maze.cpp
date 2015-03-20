@@ -90,27 +90,32 @@ int main()
 	//探索路径
 	while(true)
 	{
-	
+	    if(Getpop(head).x==3&&Getpop(head).y==3)
+			break;
 		//对下一块进行探测
 		bool sea=true;
 		node  temp;
+
+		//每一步路径探索
 		while(sea)
 		{
-			temp=Getpop(head);						
+			temp=Getpop(head);		
+			//temp.above!=4条件防止左右或上下循环走
+			//temp.direction为前进方向
 			switch (temp.direction)
 			{
 			case 1:
-				
+				//探索成功，即向右可以，且上一步来的方向不是左，防止左右死循环，探索成功，方向加一，便于下次回溯换一个方向探索
 				if((temp.y+1)<BLOCKNUM&&map[temp.x][temp.y+1]==0&&temp.above!=3)
 				{
 					Change(head,temp.direction+1);	
-					Push(head,temp.x,temp.y+1,1,1);
-					sea=false; 
+					Push(head,temp.x,temp.y+1,1,1);//探索成功进栈
+					sea=false; //停止循环
 					
 				}
 				else
 				{
-					Change(head,temp.direction+1);		
+					Change(head,temp.direction+1);		//向右探索失败，探索方向加一，继续探索
 				}
 			
 				break;
@@ -151,7 +156,7 @@ int main()
 					sea=false;
 				}
 				break;
-			default:
+			default://即当temp.direction==5，此方块已经把所有方向都探索完了，把他出栈
 				Pop(head);
 				sea=false;
 				break;
@@ -160,9 +165,10 @@ int main()
 		
 	}
 	node *kk=head;
+	cout<<"走出迷宫路径为："<<endl;
 	while(kk!=NULL)
-	{
-		cout<<kk->x<<"  "<<kk->y<<"  "<<kk->direction<<endl;
+	{		
+		cout<<"("<<kk->x<<","<<kk->y<<")"<<endl;
 		kk=kk->next;
 	}
 
