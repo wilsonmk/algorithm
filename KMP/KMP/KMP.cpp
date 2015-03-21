@@ -55,11 +55,23 @@ void calculateNext(int * & next,string t)
 				k--;
 				
 			}
-			if(state)
-				*(next+j)=0;
+			if(state)//满足其他条件，即为0
+			 *(next+j)=0;
 		}
 
 	}
+}
+
+//kmp匹配算法,s为主串，t为模式串
+int KMP(int * next,string s,string t)
+{
+	int j=0,i=0;
+	bool yes=false;
+	while(i<s.size())
+	{
+	}
+	return i-t.size()+1;
+	
 }
 
 int main()
@@ -75,7 +87,10 @@ int main()
 		cout<<*(next+i)<<endl;
 	
 	int BForigin=BF(s,t);
-	cout<<"模式匹配的位置是："<<BForigin<<"->"<<BForigin+t.size()<<endl;
+	cout<<"BF算法模式匹配的位置是："<<BForigin<<"->"<<BForigin+t.size()<<endl;
+
+    int KMPorigin=KMP(next,s,t);
+	cout<<"KMP算法模式匹配的位置是："<<KMPorigin<<"->"<<KMPorigin+t.size()<<endl;
 	return 0;
 }
 

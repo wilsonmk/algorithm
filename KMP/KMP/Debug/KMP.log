@@ -1,4 +1,4 @@
-﻿生成启动时间为 2015/3/21 15:48:45。
+﻿生成启动时间为 2015/3/21 16:30:35。
      1>项目“E:\VS2012\Projects\KMP\KMP\KMP.vcxproj”在节点 2 上(Build 个目标)。
      1>ClCompile:
          D:\WIN8\VS2012\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Debug\KMP.pch" /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt KMP.cpp
@@ -6,7 +6,8 @@
      1>e:\vs2012\projects\kmp\kmp\kmp.cpp(13): warning C4018: “<”: 有符号/无符号不匹配
      1>e:\vs2012\projects\kmp\kmp\kmp.cpp(16): warning C4018: “<”: 有符号/无符号不匹配
      1>e:\vs2012\projects\kmp\kmp\kmp.cpp(33): warning C4018: “<”: 有符号/无符号不匹配
-     1>e:\vs2012\projects\kmp\kmp\kmp.cpp(74): warning C4018: “<”: 有符号/无符号不匹配
+     1>e:\vs2012\projects\kmp\kmp\kmp.cpp(70): warning C4018: “<”: 有符号/无符号不匹配
+     1>e:\vs2012\projects\kmp\kmp\kmp.cpp(94): warning C4018: “<”: 有符号/无符号不匹配
        Link:
          D:\WIN8\VS2012\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\VS2012\Projects\KMP\Debug\KMP.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:\VS2012\Projects\KMP\Debug\KMP.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\VS2012\Projects\KMP\Debug\KMP.lib" /MACHINE:X86 Debug\KMP.obj
          Debug\stdafx.obj
@@ -15,4 +16,4 @@
 
 生成成功。
 
-已用时间 00:00:01.31
+已用时间 00:00:01.09
