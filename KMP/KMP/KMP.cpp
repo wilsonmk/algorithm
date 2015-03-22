@@ -114,10 +114,8 @@ int main()
 
 	int *next=new int[t.size()];//模式串的next数组
 
-	calculateNext(next,t);
+	calculateNext(next,t);//计算next匹配信息
 
-	for(int i=0;i<t.size();i++)
-		cout<<*(next+i)<<endl;
 	
 	int BForigin=BF(s,t);
 	if(BForigin==-1)
