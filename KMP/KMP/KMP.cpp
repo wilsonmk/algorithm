@@ -24,7 +24,7 @@ int BF(string s,string t)//Brute-Force,简单匹配算法
 			break;
 		}
 	}
-	return origin;
+	return origin;//匹配成功返回起始位置，失败就返回-1
 }
 
 //计算next数组，t为计算字符串
@@ -65,31 +65,59 @@ void calculateNext(int * & next,string t)
 //kmp匹配算法,s为主串，t为模式串
 int KMP(int * next,string s,string t)
 {
-	int j=0,i=0;
-	bool yes=false;
-	while(i<s.size())
-	{
-	}
-	return i-t.size()+1;
+	int j=0,i=0;//i为主串s正在匹配的字符，j为t正在匹配的字符
+	
+	while(i<s.size()&&j<t.size())
+    {
+        if(t[j] == s[i])
+        {
+            j++;i++;
+        }
+        else
+        {
+            if(j==0) 
+            {
+                i++;//若第一个字符就匹配失败，则从s的下一个字符开始
+            }
+            else
+            {
+                j = *(next+j-1)+1;//用失败函数确定t应回溯到的字符
+            }
+        }
+    }
+    if(j < t.size())//整个过程匹配失败
+    {
+        return -1;
+    }
+    return i-t.size();
 	
 }
+
 
 int main()
 {
 	
 	string s="ababcabcacbab";//主串
-	string t="abcac";//模式串
+	string t="fbab";//模式串
 
 	int *next=new int[t.size()];//模式串的next数组
 
 	calculateNext(next,t);
+
 	for(int i=0;i<t.size();i++)
 		cout<<*(next+i)<<endl;
 	
 	int BForigin=BF(s,t);
+	if(BForigin==-1)
+		cout<<"BF匹配失败！"<<endl;
+	else
+	
 	cout<<"BF算法模式匹配的位置是："<<BForigin<<"->"<<BForigin+t.size()<<endl;
 
     int KMPorigin=KMP(next,s,t);
+	if(KMPorigin==-1)
+		cout<<"KMP匹配失败！"<<endl;
+	else
 	cout<<"KMP算法模式匹配的位置是："<<KMPorigin<<"->"<<KMPorigin+t.size()<<endl;
 	return 0;
 }
