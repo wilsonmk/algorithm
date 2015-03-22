@@ -81,7 +81,8 @@ int KMP(int * next,string s,string t)
             }
             else
             {
-                j = *(next+j-1)+1;//用失败函数确定t应回溯到的字符
+				
+                j = *(next+j);//,也可以j=next[j],用next确定t应回溯到的字符
             }
         }
     }
@@ -89,7 +90,18 @@ int KMP(int * next,string s,string t)
     {
         return -1;
     }
-    return i-t.size();
+    return i-t.size();//匹配成功
+	//第二种写法
+	/*2. while(i < s.size())  
+         {  
+                  while(j > -1 && t[j] != s[i])  
+                          j = next[j];  
+                  i++, j++;  
+                  if(j >= t.size()) return i - j;  
+         }  
+	 return -1;  */
+
+
 	
 }
 
@@ -98,7 +110,7 @@ int main()
 {
 	
 	string s="ababcabcacbab";//主串
-	string t="fbab";//模式串
+	string t="acbab";//模式串
 
 	int *next=new int[t.size()];//模式串的next数组
 
