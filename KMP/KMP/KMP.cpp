@@ -9,7 +9,7 @@ using namespace std;
 
 int BF(string s,string t)//Brute-Force,简单匹配算法
 {
-	int origin=-1;//模式匹配的起始位置
+	int origin=-1;//模式匹配的起始位置，初始化为-1，查找失败时返回-1
 	for(int i=0;i<s.size();i++)
 	{
 		int k;
