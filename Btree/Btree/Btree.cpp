@@ -29,36 +29,114 @@ void CreateTree(node * & root)
 	 {
 		 root=new node;
 		 root->data=data;
-		 cout<<"zou"<<endl;
+		 
 		 CreateTree(root->lchild);
-		 cout<<"you"<<endl;
+		
 		 CreateTree(root->rchild);
-		 cout<<"endl"<<endl;
+		
 	 }
 }
 
-//检查二叉树是否包含数据aim
-bool Findnode(node * & root,string aim)
+//检查二叉树是否包含数据aim,有则返回其指针
+node * Findnode(node * & root,string aim)
 {
+	node * p;
 	if(root==NULL)//空树
-		return false;
+		return NULL;
+	else if(root->data==aim)
+		return root;
 	else
-	{
-		if(root->data==aim)
-			return true;
+	{	
+		p=Findnode(root->lchild,aim);
+		if(p!=NULL)
+			return p;
 		else
-		{
-			Findnode(root->lchild,aim);
-			Findnode(root->lchild,aim);
-		}
-
+			return Findnode(root->rchild,aim);	
+	}
+}
+void  PreOrder(node * root)//先序遍历
+{
+	if(root!=NULL)
+	{
+		cout<<root->data;
+		PreOrder(root->lchild);
+		PreOrder(root->rchild);
+	}
+}
+void  InOrder(node * root)//中序遍历
+{
+	if(root!=NULL)
+	{
+		
+		InOrder(root->lchild);
+		cout<<root->data;
+		InOrder(root->rchild);
+	}
+}
+void  PostOrder(node * root)//后序遍历
+{
+	if(root!=NULL)
+	{
+		
+		PostOrder(root->lchild);
+		PostOrder(root->rchild);
+		cout<<root->data;
 	}
 }
 
+int NodeHeight(node * root)//计算二叉树高度
+{
+	int lchild,rchlid;
+	if(root==NULL)
+		return 0;
+	else
+	{
+		lchild=NodeHeight(root->lchild);
+		rchlid=NodeHeight(root->rchild);
+		return (lchild>rchlid)?(lchild+1):(rchlid+1);
+	}
+}
+
+void Showleaf(node * root)
+{
+	if(root!=NULL)
+	{
+		if(root->lchild==NULL&&root->rchild==NULL)
+			cout<<root->data<<" ";
+		Showleaf(root->lchild);//输出左子树叶子节点
+		Showleaf(root->rchild);//输出右子树叶子节点
+	}
+}
 int main()
 {
 	node * root=NULL;//根节点
 	CreateTree(root);//生成二叉树
+	int i=0;
+	cout<<"请输入要查找的结点"<<endl;
+	string data;
+	cin>>data;
+	if(Findnode(root,data))
+		cout<<"查找成功"<<endl;
+	else
+		cout<<"查找失败"<<endl;
+
+	cout<<"二叉树的深度为： "<<NodeHeight(root)<<endl;
+
+	cout<<"二叉树先序遍历： ";
+	PreOrder(root);
+	cout<<endl;
+
+	cout<<"二叉树中序遍历： ";
+	InOrder(root);
+	cout<<endl;
+
+	cout<<"二叉树后序遍历： ";
+	PostOrder(root);
+	cout<<endl;
+
+	cout<<"二叉树叶子节点有： ";
+	Showleaf(root);
+	cout<<endl;
 	
 	return 0;
 }

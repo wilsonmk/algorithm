@@ -1,9 +1,8 @@
-﻿生成启动时间为 2015/3/25 15:05:50。
+﻿生成启动时间为 2015/3/25 16:32:31。
      1>项目“E:\VS2012\Projects\Btree\Btree\Btree.vcxproj”在节点 2 上(Build 个目标)。
      1>ClCompile:
          D:\WIN8\VS2012\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Debug\Btree.pch" /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt Btree.cpp
          Btree.cpp
-     1>e:\vs2012\projects\btree\btree\btree.cpp(56): warning C4715: “Findnode”: 不是所有的控件路径都返回值
        Link:
          D:\WIN8\VS2012\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\VS2012\Projects\Btree\Debug\Btree.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:\VS2012\Projects\Btree\Debug\Btree.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\VS2012\Projects\Btree\Debug\Btree.lib" /MACHINE:X86 Debug\Btree.obj
          Debug\stdafx.obj
@@ -12,4 +11,4 @@
 
 生成成功。
 
-已用时间 00:00:02.27
+已用时间 00:00:01.71
