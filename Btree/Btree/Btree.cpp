@@ -29,18 +29,37 @@ void CreateTree(node * & root)
 	 {
 		 root=new node;
 		 root->data=data;
-		 cout<<"左"<<endl;
+		 cout<<"zou"<<endl;
 		 CreateTree(root->lchild);
 		 cout<<"you"<<endl;
 		 CreateTree(root->rchild);
+		 cout<<"endl"<<endl;
 	 }
 }
 
+//检查二叉树是否包含数据aim
+bool Findnode(node * & root,string aim)
+{
+	if(root==NULL)//空树
+		return false;
+	else
+	{
+		if(root->data==aim)
+			return true;
+		else
+		{
+			Findnode(root->lchild,aim);
+			Findnode(root->lchild,aim);
+		}
+
+	}
+}
 
 int main()
 {
 	node * root=NULL;//根节点
 	CreateTree(root);//生成二叉树
+	
 	return 0;
 }
 
