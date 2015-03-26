@@ -6,6 +6,7 @@
 #include<string>
 using namespace std;
 
+#define MAXSIZE 5  //定义图的结点数
 //使用邻接表存储图的信息
 
 //定义邻接表结点的结构
@@ -31,12 +32,6 @@ struct Head
 	}
 };
 
-//定义栈，用栈实现深度优先搜索
-struct shed
-{
-	int data[100];
-	int top;
-};
 
 //建立邻接表
 void Create(Head * & head)
@@ -45,10 +40,10 @@ void Create(Head * & head)
 	while(true)
 	{
 		int name,wg;
-		cin>>name;
+		cin>>name;//输入结点
 		if(name==-1)//输入-1表示链表结束
 			break;
-		cin>>wg;
+		cin>>wg;//输入权值
 		node * temp=new node;
 		temp->data=name;
 		temp->weight=wg;
@@ -66,18 +61,14 @@ void Create(Head * & head)
 }
 
 
-void show(Head * head[])
-{
-	cout<<head[1]->first->data<<endl;
-}
 
 //递归深度优先搜索
 void DFS_DG(Head *head[],int v,int visited[])
 {
-	node * p;
+	node * p;//表结点
 	visited[v]=1;
 	cout<<v<<endl;
-	p=head[v]->first;
+	p=head[v]->first;//获取第一个表结点
 	while(p!=NULL)
 	{
 		if(visited[p->data]==0)
@@ -86,16 +77,46 @@ void DFS_DG(Head *head[],int v,int visited[])
 	}
 }
 
-void DFS_Shep(Head *head[],int v,int visited[])
+//广度优先搜索遍历--使用队列
+void BFS(Head *head[],int v)
 {
+	node *p;//表结点指针
+	
+	int queue[MAXSIZE],front=0,rear=0;//顺序队列，front是头，rear是尾，队列是插尾删头，先进先出
+	int visited[MAXSIZE]={0};//访问标志数组初始化为0
 
+	//开始访问
+	cout<<v;
+	visited[v]=1;
+	rear=(rear+1)%MAXSIZE;
+	queue[rear]=v;//入队
+
+	int ok;
+	while(front!=rear)//队列不为空
+	{
+		front=(front+1)%MAXSIZE;
+		ok=queue[front];//出队
+		p=head[ok]->first;//获取第一个表结点
+		while(p!=NULL)//循环遍历其表结点
+		{
+			if(visited[p->data]==0)//该表结点没有访问过
+			{
+				cout<<p->data;
+				visited[p->data]=1;
+				rear=(rear+1)%MAXSIZE;
+				queue[rear]=p->data;//入队
+			}
+			p=p->next;//找下一个结点
+		}
+	}
 }
+
 int main()
 {
 	
-	int visited[5]={0};
-	Head * head[5];//表头指针数组
-	for(int i=0;i<5;i++)
+	int visited[MAXSIZE]={0};
+	Head * head[MAXSIZE];//表头指针数组
+	for(int i=0;i<MAXSIZE;i++)
 	{
 		head[i]=new Head;
 		head[i]->data=i;
@@ -103,18 +124,12 @@ int main()
 		Create(head[i]);
 
 	}
-	while(true)
-	{
-		for(int i=0;i<5;i++)
-			visited[i]=0;
-		int ok;
-		cout<<"起始点为"<<endl;
-		cin>>ok;
-		if(ok==10)
-			break;
-	    DFS_DG(head,ok,visited);
-	}
-	
+	cout<<"深度优先搜索遍历结果为"<<endl;
+	DFS_DG(head,0,visited);
+
+	cout<<"广度优先搜索遍历结果为"<<endl;
+	BFS(head,0);
+
 	return 0;
 }
 
