@@ -46,9 +46,10 @@ void Create(Head * & head)
 		if(name==-1)//输入-1表示链表结束
 			break;
 		cin>>wg;//输入权值
-		node * temp=new node;
+		node * temp=new node;//定义表结点
 		temp->data=name;
 		temp->weight=wg;
+		//把表结点插入到head后面
 		if(head->first==NULL)
 			head->first=temp;
 		else
@@ -65,7 +66,8 @@ void Create(Head * & head)
 
 
 //递归深度优先搜索
-void DFS_DG(Head *head[],int v,int visited[])
+
+void DFS_DG(Head *head[],int v,int visited[])//head[]-头指针数组，v-起始顶点，visited[]--标记数组
 {
 	node * p;//表结点
 	visited[v]=1;
@@ -129,7 +131,7 @@ int main()
 	cout<<endl<<"深度优先搜索遍历结果为"<<endl;
 	DFS_DG(head,0,visited);
 
-	cout<<"广度优先搜索遍历结果为"<<endl;
+	cout<<endl<<"广度优先搜索遍历结果为"<<endl;
 	BFS(head,0);
 
 	return 0;
