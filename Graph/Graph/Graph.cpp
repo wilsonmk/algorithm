@@ -7,6 +7,8 @@
 using namespace std;
 
 #define MAXSIZE 5  //定义图的结点数
+
+
 //使用邻接表存储图的信息
 
 //定义邻接表结点的结构
@@ -67,7 +69,7 @@ void DFS_DG(Head *head[],int v,int visited[])
 {
 	node * p;//表结点
 	visited[v]=1;
-	cout<<v<<endl;
+	cout<<v;
 	p=head[v]->first;//获取第一个表结点
 	while(p!=NULL)
 	{
@@ -124,7 +126,7 @@ int main()
 		Create(head[i]);
 
 	}
-	cout<<"深度优先搜索遍历结果为"<<endl;
+	cout<<endl<<"深度优先搜索遍历结果为"<<endl;
 	DFS_DG(head,0,visited);
 
 	cout<<"广度优先搜索遍历结果为"<<endl;
