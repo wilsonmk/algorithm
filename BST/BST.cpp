@@ -5,10 +5,10 @@
 #include<iostream>
 using namespace std;
 
-//½áµã½á¹¹
+//æ ‘ç»“ç‚¹ç»“æ„
 struct node
 {
-	int key;//¹Ø¼ü×ÖÏî
+	int key;//å…³é”®å­—é¡¹
 	node * lchild;
 	node * rchild;
 	node()
@@ -17,35 +17,35 @@ struct node
 	}
 };
 
-//¶ş²æÅÅĞòÊ÷½Úµã²åÈë
+//äºŒå‰æ’åºæ ‘èŠ‚ç‚¹æ’å…¥
 int  Insert(node * &root,int key)
 {
 	if(root==NULL)
 	{
 		root=new node;
 		root->key=key;
-		return 1;//²åÈë³É¹¦
+		return 1;//æ’å…¥æˆåŠŸ
 	}
-	else if(key==root->key)//ÒÑ¾­´æÔÚ
-		return 0;//²åÈëÊ§°Ü
+	else if(key==root->key)//å·²ç»å­˜åœ¨
+		return 0;//æ’å…¥å¤±è´¥
 
-	else if(key<root->key)//²åµ½×ó×ÓÊ÷
+	else if(key<root->key)//æ’åˆ°å·¦å­æ ‘
 		return Insert(root->lchild,key);
 	else
 		return Insert(root->rchild,key);
 
 }
 
-//¶ş²æÅÅĞòÊ÷´´½¨
+//äºŒå‰æ’åºæ ‘åˆ›å»º
 void Create(node * &root)
 {
-	int a[]={9,7,10,5,8,15,4,6,14};//½áµãÊı¾İ
+	int a[]={9,7,10,5,8,15,4,6,14};//ç»“ç‚¹æ•°æ®
 	for(int i=0;i<9;i++)
-	   Insert(root,a[i]);//½Úµã²åÈë
+	   Insert(root,a[i]);//èŠ‚ç‚¹æ’å…¥
 	
 }
 
-//½Úµã²éÕÒ
+//èŠ‚ç‚¹æŸ¥æ‰¾
 node * Search(node * root,int key)
 {
 	if(root==NULL)
@@ -53,15 +53,15 @@ node * Search(node * root,int key)
 	if(root->key==key)
 		return root;
 	if(root->key>key)
-		return Search(root->lchild,key);//×ó×ÓÊ÷²éÕÒ
+		return Search(root->lchild,key);//å·¦å­æ ‘æŸ¥æ‰¾
 	else
-		return Search(root->rchild,key);//ÓÒ×ÓÊ÷²éÕÒ
+		return Search(root->rchild,key);//å³å­æ ‘æŸ¥æ‰¾
 }
 
-void Delete2(node * & root, node * & right)//ÒªÓÃÒıÓÃÀàĞÍ£¬ÒòÎªÒª¶ÔÊ÷±¾Éí²Ù×÷
+void Delete2(node * & root, node * & right)//è¦ç”¨å¼•ç”¨ç±»å‹ï¼Œå› ä¸ºè¦å¯¹æ ‘æœ¬èº«æ“ä½œ
 {
 	node * temp;
-	if(right->rchild!=NULL)//¼´ÕÒµ½×ó×ÓÊ÷×îÓÒÏÂµÄ½áµã£¬¼´×ó×ÓÊ÷×î´óÖµ,´ËÊ±µÄrightÖ¸ÏòÕâ¸ö×î´ó½áµã
+	if(right->rchild!=NULL)//å³æ‰¾åˆ°å·¦å­æ ‘æœ€å³ä¸‹çš„ç»“ç‚¹ï¼Œå³å·¦å­æ ‘æœ€å¤§å€¼,æ­¤æ—¶çš„rightæŒ‡å‘è¿™ä¸ªæœ€å¤§ç»“ç‚¹
 		Delete2(root,right->rchild);
 	else
 	{
@@ -75,43 +75,43 @@ void Delete2(node * & root, node * & right)//ÒªÓÃÒıÓÃÀàĞÍ£¬ÒòÎªÒª¶ÔÊ÷±¾Éí²Ù×÷
 int Delete(node * &root,int key)
 {
 	if(root==NULL)
-		return 0;//¿ÕÊ÷Ê§°Ü
+		return 0;//ç©ºæ ‘å¤±è´¥
 	else
 	{
 		if(root->key>key)
-			return Delete(root->lchild,key);//µİ¹é×ó×ÓÊ÷É¾³ı
+			return Delete(root->lchild,key);//é€’å½’å·¦å­æ ‘åˆ é™¤
 
 		else if(root->key<key)
-			return Delete(root->rchild,key);//µİ¹éÓÒ×ÓÊ÷É¾³ı
+			return Delete(root->rchild,key);//é€’å½’å³å­æ ‘åˆ é™¤
 		
-		else//ÕÒµ½ÁËkeyÖµµÄ½áµã
+		else//æ‰¾åˆ°äº†keyå€¼çš„ç»“ç‚¹
 		{
-			//É¾³ı
-			if(root->rchild==NULL&&root->lchild==NULL)//Ã»ÓĞ×óÓÒ×ÓÊ÷£¬¼´Ò¶×Ó½áµã£¬Ö±½ÓÉ¾³ı
+			//åˆ é™¤
+			if(root->rchild==NULL&&root->lchild==NULL)//æ²¡æœ‰å·¦å³å­æ ‘ï¼Œå³å¶å­ç»“ç‚¹ï¼Œç›´æ¥åˆ é™¤
 			{
 				node * temp=root;
 				root=NULL;
 				delete temp;
 				
-				//2.delete root;ÄÜÉ¾³ıÒ¶×Ó½áµã£¬µ«¸¸½áµãµÄlchild»òrchildÃ»ÖÃNULL
+				//2.delete root;èƒ½åˆ é™¤å¶å­ç»“ç‚¹ï¼Œä½†çˆ¶ç»“ç‚¹çš„lchildæˆ–rchildæ²¡ç½®NULL
 			}
 
-			else if(root->rchild==NULL)//Ã»ÓĞÓÒ×ÓÊ÷¡£
+			else if(root->rchild==NULL)//æ²¡æœ‰å³å­æ ‘ã€‚
 			{
 				 node *temp=root;
 				 root=root->lchild;
 				 delete temp;
 			}
-			else if(root->lchild==NULL)//Ã»ÓĞ×ó×ÓÊ÷
+			else if(root->lchild==NULL)//æ²¡æœ‰å·¦å­æ ‘
 			{
 				 node *temp=root;
 				 root=root->rchild;
 				 delete temp;
 			}
-			//ÓĞ×óÓÒ×ÓÊ÷
+			//æœ‰å·¦å³å­æ ‘
 			else
 			{
-				Delete2(root,root->lchild);//ÒªÓÃÒıÓÃÀàĞÍ£¬ÒòÎªÒª¶ÔÊ÷±¾Éí²Ù×÷
+				Delete2(root,root->lchild);//è¦ç”¨å¼•ç”¨ç±»å‹ï¼Œå› ä¸ºè¦å¯¹æ ‘æœ¬èº«æ“ä½œ
 				 
 			}
 			return 1;
@@ -125,7 +125,7 @@ int Delete(node * &root,int key)
 
 int main()
 {
-	node *root=NULL;//¸ù½Úµã
+	node *root=NULL;//æ ¹èŠ‚ç‚¹
 	Create(root);
 
 	node * ok=Search(root,7);
