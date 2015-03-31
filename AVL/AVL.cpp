@@ -1,17 +1,17 @@
 
-//Æ½ºâ¶ş²æÊ÷
+//å¹³è¡¡äºŒå‰æ ‘
 
 #include<iostream>
 #include<queue>
 using namespace std;
 
-//Æ½ºâ¶ş²æÊ÷µÄ½¨Á¢£¬±éÀú£¬£¬
+//å¹³è¡¡äºŒå‰æ ‘çš„å»ºç«‹ï¼Œéå†
 
-//Ê÷½áµã½á¹¹
+//æ ‘ç»“ç‚¹ç»“æ„
 struct node
 {
-	int data;//Êı¾İ
-	int bf;//Æ½ºâÒò×Ó
+	int data;//æ•°æ®
+	int bf;//å¹³è¡¡å› å­
 	node*lchild,*rchild;
 	node()
 	{
@@ -19,18 +19,18 @@ struct node
 	}
 };
 
-//Æ½ºâÒò×ÓÎª  ×ó×ÓÊ÷¸ß¶È-ÓÒ×ÓÊ÷¸ß¶È
-#define LH +1   //±íÊ¾×ó±ß¸ß  ¼´1
-#define EH 0    //±íÊ¾µÈ¸ß    ¼´0
-#define RH -1  //±íÊ¾ÓÒ±ß¸ß   Ğ¡¼õ´ó£¬¼´-1
+//å¹³è¡¡å› å­ä¸º  å·¦å­æ ‘é«˜åº¦-å³å­æ ‘é«˜åº¦
+#define LH +1   //è¡¨ç¤ºå·¦è¾¹é«˜  å³1
+#define EH 0    //è¡¨ç¤ºç­‰é«˜    å³0
+#define RH -1  //è¡¨ç¤ºå³è¾¹é«˜   å°å‡å¤§ï¼Œå³-1
 
-void R_rotate(node * &p){//ÓÒĞı£¬
+void R_rotate(node * &p){//å³æ—‹ï¼Œ
 	node * lc=p->lchild;
 	p->lchild=lc->rchild;
 	lc->rchild=p;
 	p=lc;
 }
-void L_rotata(node * &p){//×óĞı£¬
+void L_rotata(node * &p){//å·¦æ—‹ï¼Œ
 	node * rc=p->rchild;
 	p->rchild=rc->lchild;
 	rc->lchild=p;
@@ -42,16 +42,16 @@ void L_rotata(node * &p){//×óĞı£¬
 
 
 
-void Leftbalance(node * &T){//×ó×ÓÊ÷µÄÆ½ºâ´¦Àí
+void Leftbalance(node * &T){//å·¦å­æ ‘çš„å¹³è¡¡å¤„ç†
 	node * lc=T->lchild;
 	switch(lc->bf){
-	//LLµÄÇé¿ö
+	//LLçš„æƒ…å†µ
 	case LH:
 		T->bf=lc->bf=EH;
 		R_rotate(T);
 		break;
 
-	case RH://LRµÄÇé¿ö£¬Í¬Ê±Õë¶ÔrdÉÏµÄ²»Í¬Çé¿ö£¬½øĞĞ¶ÔT£¬lcµÄÆ½ºâÒò×ÓµÄÉèÖÃ
+	case RH://LRçš„æƒ…å†µï¼ŒåŒæ—¶é’ˆå¯¹rdä¸Šçš„ä¸åŒæƒ…å†µï¼Œè¿›è¡Œå¯¹Tï¼Œlcçš„å¹³è¡¡å› å­çš„è®¾ç½®
 		node * rd=lc->rchild;
 		switch(rd->bf){
 			case LH:T->bf=RH; lc->bf=EH;break;
@@ -67,7 +67,7 @@ void Leftbalance(node * &T){//×ó×ÓÊ÷µÄÆ½ºâ´¦Àí
 }
 
 
-void Rightbalance(node * &T)//ÓÒ×ÓÊ÷µÄÆ½ºâ´¦Àí£¬Óë×ó×ÓÊ÷µÄÆ½ºâ´¦ÀíÀàËÆ
+void Rightbalance(node * &T)//å³å­æ ‘çš„å¹³è¡¡å¤„ç†ï¼Œä¸å·¦å­æ ‘çš„å¹³è¡¡å¤„ç†ç±»ä¼¼
 {
 	node * rc=T->rchild;
 	switch (rc->bf)
@@ -95,7 +95,7 @@ void Rightbalance(node * &T)//ÓÒ×ÓÊ÷µÄÆ½ºâ´¦Àí£¬Óë×ó×ÓÊ÷µÄÆ½ºâ´¦ÀíÀàËÆ
 
 
 bool InsertAVL(node * &T,int e,bool &taller){
-	if(!T){//´Ë½áµãÎª¿Õ£¬Ôò²åÈë£¬²¢ÉèÖÃ¸ÃµãÆ½ºâÒò×ÓÎª0£¬tallerÎªtrue£¬³¤¸ßÁË
+	if(!T){//æ­¤ç»“ç‚¹ä¸ºç©ºï¼Œåˆ™æ’å…¥ï¼Œå¹¶è®¾ç½®è¯¥ç‚¹å¹³è¡¡å› å­ä¸º0ï¼Œtallerä¸ºtrueï¼Œé•¿é«˜äº†
 		T=new node;
 		T->data =e; 
 		T->lchild=T->rchild=NULL;  
@@ -104,28 +104,28 @@ bool InsertAVL(node * &T,int e,bool &taller){
 	}
 	else
 	{
-		if(e==T->data)//ÒÑ¾­´æÔÚ£¬²»²åÈë£¬·µ»Ø0;
+		if(e==T->data)//å·²ç»å­˜åœ¨ï¼Œä¸æ’å…¥ï¼Œè¿”å›0;
 		{
 			taller =false;
 			return 0;
 		}
-		if(e<T->data)//Èç¹ûeĞ¡ÓÚ±¾½áµã£¬Ôò¼ÌĞøÔÚ×ó×ÓÊ÷ËÑË÷£¬
+		if(e<T->data)//å¦‚æœeå°äºæœ¬ç»“ç‚¹ï¼Œåˆ™ç»§ç»­åœ¨å·¦å­æ ‘æœç´¢ï¼Œ
 		{
 			 if(!InsertAVL(T->lchild,e,taller))
-				 return 0;//Î´²åÈë£¬·µ»Ø0;
-			 if(taller)//ÒÑ¾­²åÈëµ½ÁË×ó×ÓÊ÷£¬ÔòÒª¼ì²éÆ½ºâ¶È£¬
-			 {        //×¢Òâ£¡¼ì²éÆ½ºâ¶ÈÊÇÓÉÏÂÍùÉÏµÄ£¬ÄÄ¸ö½áµãµÄÊ§È¥Æ½ºâ£¬Ôò¶Ô¸Ã½áµã½øĞĞÆ½ºâ²Ù×÷
+				 return 0;//æœªæ’å…¥ï¼Œè¿”å›0;
+			 if(taller)//å·²ç»æ’å…¥åˆ°äº†å·¦å­æ ‘ï¼Œåˆ™è¦æ£€æŸ¥å¹³è¡¡åº¦ï¼Œ
+			 {        //æ³¨æ„ï¼æ£€æŸ¥å¹³è¡¡åº¦æ˜¯ç”±ä¸‹å¾€ä¸Šçš„ï¼Œå“ªä¸ªç»“ç‚¹çš„å¤±å»å¹³è¡¡ï¼Œåˆ™å¯¹è¯¥ç»“ç‚¹è¿›è¡Œå¹³è¡¡æ“ä½œ
 				switch(T->bf)
 				{
-				   case LH:   //±¾½áµã±¾À´×ó±ÈÓÒ¸ß£¬ÏÖÔÚ²åÈëÁË£¬ËùÒÔÒª×öÆ½ºâ´¦Àí
+				   case LH:   //æœ¬ç»“ç‚¹æœ¬æ¥å·¦æ¯”å³é«˜ï¼Œç°åœ¨æ’å…¥äº†ï¼Œæ‰€ä»¥è¦åšå¹³è¡¡å¤„ç†
 					  Leftbalance(T);
 					  taller=false; 
 					  break;
-				   case EH:  //±¾À´µÈ¸ß£¬ÏÖÔÚ²åÈëÁË£¬ËùÒÔ±¾½áµãÆ½ºâÒò×ÓÎª1;taller ÉèÎªfalse £¬½øÈëÏÂÒ»¸öµİ¹éµÄÊ±ºò£¬²»ĞèÒªÔÚ¼ì²éÆ½ºâ£»
+				   case EH:  //æœ¬æ¥ç­‰é«˜ï¼Œç°åœ¨æ’å…¥äº†ï¼Œæ‰€ä»¥æœ¬ç»“ç‚¹å¹³è¡¡å› å­ä¸º1;taller è®¾ä¸ºfalse ï¼Œè¿›å…¥ä¸‹ä¸€ä¸ªé€’å½’çš„æ—¶å€™ï¼Œä¸éœ€è¦åœ¨æ£€æŸ¥å¹³è¡¡ï¼›
 					  T->bf=LH; 
 					  taller=true;
 					  break;
-				   case RH://±¾À´ÓÒ±ß¸ß£¬ÏÖÔÚ²åÈëÁË£¬ËùÒÔ±¾½áµãÆ½ºâÒò×ÓÎª0;taller ÉèÎªfalse £¬½øÈëÏÂÒ»¸öµİ¹éµÄÊ±ºò£¬²»ĞèÒªÔÚ¼ì²éÆ½ºâ£»
+				   case RH://æœ¬æ¥å³è¾¹é«˜ï¼Œç°åœ¨æ’å…¥äº†ï¼Œæ‰€ä»¥æœ¬ç»“ç‚¹å¹³è¡¡å› å­ä¸º0;taller è®¾ä¸ºfalse ï¼Œè¿›å…¥ä¸‹ä¸€ä¸ªé€’å½’çš„æ—¶å€™ï¼Œä¸éœ€è¦åœ¨æ£€æŸ¥å¹³è¡¡ï¼›
 					  T->bf =EH; 
 					  taller=false; 
 					  break;
@@ -135,22 +135,22 @@ bool InsertAVL(node * &T,int e,bool &taller){
 
 		}
 		else
-		{//ÔÚÓÒ×ÓÊ÷ÖĞ²éÕÒ
+		{//åœ¨å³å­æ ‘ä¸­æŸ¥æ‰¾
 				if(!InsertAVL(T->rchild,e,taller))
-					return 0;//Î´²åÈë£¬·µ»Ø0;
+					return 0;//æœªæ’å…¥ï¼Œè¿”å›0;
 				if(taller)
-				{ //Í¬ÉÏ£¬¼ì²éÆ½ºâ
+				{ //åŒä¸Šï¼Œæ£€æŸ¥å¹³è¡¡
 				  switch(T->bf)
 				  {
-					case LH://±¾À´×ó¸ß£¬ÏÖÔÚµÈ¸ß
+					case LH://æœ¬æ¥å·¦é«˜ï¼Œç°åœ¨ç­‰é«˜
 						T->bf=EH; 
 						taller=false; 
 						break;
-					case EH://±¾À´Æ½ºâ£¬ÏÖÔÚÓÒÔö¸ßÁË£¬ËùÒÔ±¾½áµãÆ½ºâÒò×ÓÎª-1.tallerÎªtrue£¬½øÈëÏÂÒ»¸öµİ¹éÊÇ¼ÌĞø¼ì²éÆ½ºâ£¬
+					case EH://æœ¬æ¥å¹³è¡¡ï¼Œç°åœ¨å³å¢é«˜äº†ï¼Œæ‰€ä»¥æœ¬ç»“ç‚¹å¹³è¡¡å› å­ä¸º-1.tallerä¸ºtrueï¼Œè¿›å…¥ä¸‹ä¸€ä¸ªé€’å½’æ˜¯ç»§ç»­æ£€æŸ¥å¹³è¡¡ï¼Œ
 						T->bf=RH;
 						taller=true;
 						break;
-					case RH://±¾À´ÓÒ¸ß£¬ÏÖÔÚÓÒÓÖÔö¸ßÁË£¬ËùÒÔÊ§È¥Æ½ºâ£¬¶Ô¸Ã½Úµã½øĞĞÆ½ºâ´¦Àí
+					case RH://æœ¬æ¥å³é«˜ï¼Œç°åœ¨å³åˆå¢é«˜äº†ï¼Œæ‰€ä»¥å¤±å»å¹³è¡¡ï¼Œå¯¹è¯¥èŠ‚ç‚¹è¿›è¡Œå¹³è¡¡å¤„ç†
 						Rightbalance(T);
 						taller=false;
 						break;
@@ -164,7 +164,7 @@ bool InsertAVL(node * &T,int e,bool &taller){
 	return 1;
 }
 
-//Êä³öº¯Êı
+//è¾“å‡ºå‡½æ•°
 void cengcitravel(node * T){
     node * p;
     queue<node *>sq;
@@ -182,15 +182,15 @@ void cengcitravel(node * T){
 
 int main(){
 	node * T=NULL;
-	bool f=false;//±íÊ¾ÊÇ·ñ²åÈë³É¹¦£¬³É¹¦Îªtrue
+	bool f=false;//è¡¨ç¤ºæ˜¯å¦æ’å…¥æˆåŠŸï¼ŒæˆåŠŸä¸ºtrue
 
 	int data[9]={16,3,7,11,9,26,18,14,15};
 	for(int i=0;i<9;i++)
 	{
-		InsertAVL(T,data[i],f);//²åÈë½áµã
+		InsertAVL(T,data[i],f);//æ’å…¥ç»“ç‚¹
 	}
 	
-	cengcitravel(T);//Êä³öĞòÁĞ
+	cengcitravel(T);//è¾“å‡ºåºåˆ—
 	cout<<endl;
 
 	return 0;
