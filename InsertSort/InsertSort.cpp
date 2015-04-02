@@ -29,6 +29,7 @@ void InsertSort(int a[],int len)//递增排列
 		cout<<a[i]<<"  ";
 }
 
+
 //二分插入排序
 void InsertSort1(int a[],int len)//递增排列
 {
