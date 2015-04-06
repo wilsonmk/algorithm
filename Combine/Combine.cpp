@@ -2,7 +2,7 @@
 #include<iostream>
 using namespace std;
 
-//归并排序===================================================
+//归并排序====================================================
 
 //合并有序数列a[first...mid]和a[mid+1...last]， a[first...mid]和a[mid+1...last]一定为有序
 void Combine(int a[], int first, int mid, int last)  
